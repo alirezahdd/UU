@@ -31,3 +31,5 @@ The image is ready. Let's _unmount_ it.
 sudo umount mnt
 ```
 ### **2. Preparing Kernel Image**
+In this part, a linux kernel source should be downloaded, configured, and compiled.  
+Browse [https://kernel.org/pub/linux/kernel](https://kernel.org/pub/linux/kernel) to find your desired release and copy the address of a linux kernel source _tarball_ (\*.tar.gz).
