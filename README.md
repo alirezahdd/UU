@@ -1,4 +1,6 @@
-## **How to run a Kernel-based Virtual Machine (KVM) via linux command line and _ssh_ to it?** 
+## **How to make and run a Kernel-based Virtual Machine (KVM) via linux command line and _ssh_ to it?** 
+First of all, I took the material and commands from https://chpresearch.wordpress.com/2018/10/04/making-simple-kvm-image/ and made it a little bit more clear for newbees.  
+  
 in this simple _step-by-step_ tutorial we are going to build and run a kvm via linux command line, without having/using any graphical interface. For that, two things are required:   
 1. [An ext4 disk image on which linux (Debian) rootfs is installed](#1-preparing-disk-image).  
 2. [A linux kernel bzImage](#2-preparing-kernel-image).  
