@@ -9,7 +9,7 @@ We create raw 20G disk image, named `ubuntu_18.04.img` (you can name it whatever
 qemu-img create -f raw ubuntu_18.04.img 20G     
 mkfs.ext4 ubuntu_18.04.img                      
 ```
-To install linux rootfs on the created disk image, we have to _mount_ the image on a folder and then install the desired version of rootfs. So now we create a folder, named `mnt` (of course again you can name it whatever you want), and _mount_ the disk image on it.
+To install linux rootfs on the created disk image, we have to _mount_ the image on a folder (so we can access it) and then install the desired version of rootfs. So now we create a folder, named `mnt` (of course again you can name it whatever you want), and _mount_ the disk image on it.
 ```bash
 mkdir mnt
 sudo mount -o loop ubuntu_18.04.img mnt
@@ -18,7 +18,7 @@ Now we have access to the disk image using `mnt` folder. We now install rootfs o
 ```bash
 sudo debootstrap --arch amd64 --include=ssh,vim bionic mnt
 ```
-Now we should add a user (we need this to logging in via ssh to the virtual machine) to the system.
+Now we should add a user (we need this to logging in via ssh to the virtual machine) to the created partition. For that, we first need to change Root to the mnt directory (using `chroot` command). After adding a user, We exit chroot by `exit` command. 
 ```bash
 sudo chroot mnt
 passwd
@@ -26,10 +26,15 @@ adduser USERNAME
 usermod -aG sudo USERNAME
 exit
 ```
-The image is ready. Let's _unmount_ it.
+The image is ready. Let's _unmount_ it from mnt directory.
 ```bash
 sudo umount mnt
 ```
 ### **2. Preparing Kernel Image**
 In this part, a linux kernel source should be downloaded, configured, and compiled.  
-Browse [https://kernel.org/pub/linux/kernel](https://kernel.org/pub/linux/kernel) to find your desired release and copy the address of a linux kernel source _tarball_ (\*.tar.gz).
+Browse [https://kernel.org/pub/linux/kernel](https://kernel.org/pub/linux/kernel), find your desired release, copy the address of a linux kernel source _tarball_ (\*.tar.gz), download it via `wget` command, and extract it via `tar`.
+```bash
+wget https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.14.1.tar.gz
+tar -xf linux-5.14.1.tar.gz
+```
+
