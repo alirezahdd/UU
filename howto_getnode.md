@@ -10,3 +10,9 @@ int main(void) {
   printf("CPU: %d , node: %d \n", cpu, node);
   return 0;
 }
+```  
+the above code should be compiled using `-lnuma` flag
+```bash
+gcc test.c -lnuma
+./a.out
+```
