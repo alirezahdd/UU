@@ -46,7 +46,7 @@ Considerig examples above, our hello world system call would be like this:
 SYSCALL_DEFINE1(hello, char *, msg)
 {
   char buffer[256];
-  strncpy_from_user(buffer, msg, sizeof(buf));
+  strncpy_from_user(buffer, msg, sizeof(buffer));
   printk(KERN_INFO "your syscall called with \"%s\"\n", buffer);
   return 0;
 }
