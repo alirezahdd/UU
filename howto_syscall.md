@@ -1,8 +1,9 @@
 ## **How to write a HelloWorld linux system call?**   
 briefly, to write a linux system call and make it working:
-1. A linux kernel source should be downloaded and extracted.  
-2. A custom system call should be added to the kernel directory, and some files(e.g., system calls table, Makefile, etc.) should be updated.  
-3. Then, the linux kernel source should be compiled and installed.  
+1. [A linux kernel source should be downloaded and extracted](#1-preparing-kernel-image).  
+2. [A custom system call should be added to the kernel directory](#2-writing-a-system-call).
+3. [Some files(e.g., system calls table, Makefile, etc.) should be updated](#3-updating-makefiles-systemcall-tables-etc).  
+4. [Then, the linux kernel source should be compiled and installed](#4-compiling-the-kernel).  
   
 In this simple step-by-step tutorial we are going to write a system call and use it in a virtual machine.  
 ### **1. Preparing Kernel Image**
