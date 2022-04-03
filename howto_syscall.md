@@ -95,4 +95,5 @@ cd back to the linux folder and compile the kernel using `sudo make -jn` where n
 cd ../..
 sudo make -j8
 ```
-If everything goes well, you'll get a bzImage of your kernel under `arch/x86_64/boot` directory. Using this image you can update your kernel or use it via a virtual machine and enjoy your hello world system call.
+If everything goes well, you'll get a bzImage of your kernel under `arch/x86_64/boot` directory. Using this image you can update your kernel or use it via a virtual machine and enjoy your hello world system call.  
+In order to use your system call, write a c program, and use `syscall(548,"THE INPUT");` to call your systemcall.
