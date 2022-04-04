@@ -77,7 +77,7 @@ At this moment, we should add the new system call to the system call table. For 
 ```
 548 64  hello sys_hello
 ```
-Notice that, there are tabs (not spaces) between 548, 64, hello, and sys_hello. The number `548` is the next number after the last entry of the table (which was 547). There should be a `sys_` prefix before the name of your system call name in the last column. Now save your change and exit.  
+Notice that, there are tabs (not spaces) between 548, 64, hello, and sys_hello. The number `548` is the next number after the last entry of the table (which was 547). There should be a `sys_` prefix before the name of your system call in the last column. Now save your change and exit.  
 Now, we should add our system call to the system call's header file. To that, cd back to the linux folder and go to `include/linux/` directory and edit the `syscalls.h` file. 
 ```bash 
 cd ../../../..
