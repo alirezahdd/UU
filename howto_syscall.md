@@ -74,6 +74,11 @@ and
 core-y += kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ block/ hellofolder/
 ```
 At this moment, we should add the new system call to the system call table. For x86 machines, it exist under `arch/x86/entry/syscalls/`. So cd to it, and edit `syscall_64.tbl`. Note that if you have a 32bit system, you should edit `syscall_32.tbl` instead. To add your system call to this table, go the end of the table and add to following line to it:
+```bash
+cd arch/x86/entry/syscalls/
+sudo vim syscall_64.tbl
+```
+and add the following entry as the last entry of the table:
 ```
 548 64  hello sys_hello
 ```
