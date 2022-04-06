@@ -1,4 +1,4 @@
-Below you can find an interface to batch allocator interface in linux.
+Below you can find an interface for the _batch allocator_ in linux.
 ```c
 alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array)
 ```
