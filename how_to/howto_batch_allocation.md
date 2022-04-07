@@ -1,3 +1,4 @@
+## **How to batch allocate pages in linux?**
 Below you can find an interface for the _batch allocator_ in linux.
 ```c
 unsigned long alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array)
