@@ -1,3 +1,4 @@
+## **How to install and use the perf tool in linux?**
 The simplest way to install perf is to download a linux kernel image, extract that, cd to `tools/perf/`. compile it via `sudo make`. 
 Then use `sudo cp perf /usr/bin` to copy the perf program to the bin folder, so it will be accessible from anywhere.  
 ```bash
