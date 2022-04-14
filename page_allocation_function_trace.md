@@ -1,9 +1,15 @@
+In this tutorial we are going to trace kernel functions for:
+* single page allocation
+* bulk page allocation
+* filling up pcp list  
+ 
 For page allocations, there are 2 functions in kernel. 
 ```c
-alloc_page(gfp_mask)
-
+alloc_page(gfp_t gfp_mask);
+//or
+alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array);
 ```
-The function trace for `alloc_pages`:  
+## The Function Trace For `alloc_page()`:  
 ```c
 struct page *alloc_page(gfp_mask);
 struct page *alloc_pages(gfp_t gfp, unsigned int order);
@@ -52,7 +58,7 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 			int migratetype, unsigned int alloc_flags, struct per_cpu_pages *pcp,
 			struct list_head *list);
 
-list_first_entry(ptr, type, member)
+list_first_entry(ptr, type, member);
 ```
 or
 ```c
@@ -68,4 +74,54 @@ static inline struct page *get_page_from_free_area(struct free_area *area,
   
 list_first_entry_or_null(ptr, type, member);
 ```
-  
+## The Function Trace For `alloc_pages_bulk_array()`:
+```c
+static inline unsigned long
+alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array);
+
+unsigned long __alloc_pages_bulk(gfp_t gfp, int preferred_nid,
+			nodemask_t *nodemask, int nr_pages,
+			struct list_head *page_list,
+			struct page **page_array);
+			
+//following function is used in a loop for nr_pages iteration			
+struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
+			int migratetype,
+			unsigned int alloc_flags,
+			struct per_cpu_pages *pcp,
+			struct list_head *list)
+
+list_first_entry(ptr, type, member);
+```
+## The Function Trace For Filling Up PCP List:
+[This](https://elixir.bootlin.com/linux/latest/source/mm/page_alloc.c#L3632) is where an empty pcp list is getting filled.
+```c
+/*
+ * Obtain a specified number of elements from the buddy allocator, all under
+ * a single hold of the lock, for efficiency.  Add them to the supplied list.
+ * Returns the number of new pages which were placed at *list.
+ */
+static int rmqueue_bulk(struct zone *zone, unsigned int order,
+			unsigned long count, struct list_head *list,
+			int migratetype, unsigned int alloc_flags);
+			
+static __always_inline struct page *
+__rmqueue(struct zone *zone, unsigned int order, int migratetype,
+						unsigned int alloc_flags)
+
+static __always_inline struct page *__rmqueue_cma_fallback(struct zone *zone,
+					unsigned int order);
+					
+/*
+ * Go through the free lists for the given migratetype and remove
+ * the smallest available page from the freelists
+ */
+static __always_inline
+struct page *__rmqueue_smallest(struct zone *zone, unsigned int order,
+						int migratetype)
+						
+static inline struct page *get_page_from_free_area(struct free_area *area,
+					    int migratetype);
+					    
+list_first_entry_or_null(ptr, type, member);
+```
