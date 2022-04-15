@@ -1,7 +1,7 @@
 In this tutorial we are going to trace kernel functions for:
-* Single Page Allocation
-* Bulk Page Allocation
-* Filling Up PCP List  
+* [Single Page Allocation](#the-function-trace-for-alloc_page)
+* [Bulk Page Allocation](#the-function-trace-for-alloc_pages_bulk_array)
+* [Filling Up PCP List](#the-function-trace-for-filling-up-pcp-list)  
  
 For page allocations, there are 2 functions in kernel. 
 ```c
