@@ -1,7 +1,7 @@
 In this tutorial we are going to trace kernel functions for:
-* single page allocation
-* bulk page allocation
-* filling up pcp list  
+* Single Page Allocation
+* Bulk Page Allocation
+* Filling Up PCP List  
  
 For page allocations, there are 2 functions in kernel. 
 ```c
@@ -118,7 +118,7 @@ static __always_inline struct page *__rmqueue_cma_fallback(struct zone *zone,
  */
 static __always_inline
 struct page *__rmqueue_smallest(struct zone *zone, unsigned int order,
-						int migratetype)
+						int migratetype);
 						
 static inline struct page *get_page_from_free_area(struct free_area *area,
 					    int migratetype);
