@@ -1,3 +1,5 @@
+Page allocation in linux has many interfaces, among which two of them are simpler, `alloc_page()` and `alloc_pages_bulk_array()`.
+These function try to fetch pages from [Per CPU Pages (PCP) lists](https://elixir.bootlin.com/linux/latest/source/include/linux/mmzone.h#L369), lists consist of free pages dedicated to each cpu. Find [more info about pcp list here](https://lwn.net/Articles/884448/). If pcp lists are empty, the kernel refills them first and fetch pages from them again. 
 In this tutorial we are going to trace kernel functions for:
 * [Single Page Allocation](#the-function-trace-for-alloc_page)
 * [Bulk Page Allocation](#the-function-trace-for-alloc_pages_bulk_array)
