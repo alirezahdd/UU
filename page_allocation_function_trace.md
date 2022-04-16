@@ -1,4 +1,4 @@
-Page allocation in linux has many interfaces, among which two of them are simpler, `alloc_page()` and `alloc_pages_bulk_array()`.
+Page allocation in linux has many interfaces, among which two of them are simpler, `alloc_page()` and # `alloc_pages_bulk_array()`.
 These function try to fetch pages from [Per CPU Pages (PCP) lists](https://elixir.bootlin.com/linux/latest/source/include/linux/mmzone.h#L369), lists consist of free pages dedicated to each cpu. Find [more info about pcp list here](https://lwn.net/Articles/884448/). If pcp lists are empty, the kernel refills them first and fetch pages from them again. 
 In this tutorial we are going to trace kernel functions for:
 * [Single Page Allocation: `alloc_page()`](#the-function-trace-for-alloc_page)
@@ -11,7 +11,7 @@ alloc_page(gfp_t gfp_mask);
 //or
 alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array);
 ```
-## The Function Trace For `alloc_page()`:  
+### The Function Trace For `alloc_page()`:  
 ```c
 struct page *alloc_page(gfp_mask);
 struct page *alloc_pages(gfp_t gfp, unsigned int order);
@@ -76,7 +76,7 @@ static inline struct page *get_page_from_free_area(struct free_area *area,
   
 list_first_entry_or_null(ptr, type, member);
 ```
-## The Function Trace For `alloc_pages_bulk_array()`:
+### The Function Trace For `alloc_pages_bulk_array()`:
 ```c
 static inline unsigned long
 alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct page **page_array);
@@ -95,7 +95,7 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 
 list_first_entry(ptr, type, member);
 ```
-## The Function Trace For Filling Up PCP List:
+### The Function Trace For Filling Up PCP List:
 [This](https://elixir.bootlin.com/linux/latest/source/mm/page_alloc.c#L3632) is where an empty pcp list is getting filled.
 ```c
 /*
