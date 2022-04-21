@@ -5,7 +5,7 @@ unsigned long alloc_pages_bulk_array(gfp_t gfp, unsigned long nr_pages, struct p
 ```
 The interface, takes `GFP` (Get Free Pages) flags. These flags tells the allocator what can and can't be done while allocating.
 A list of GFP flags can be found under [/include/linux/gfp.h](https://elixir.bootlin.com/linux/v5.14.1/source/include/linux/gfp.h#L323).  
-It also takes `nr_pages` (number of pages to allocate), and `page_array` (a page array) to fill.
+It also takes `nr_pages` (number of pages to allocate), and `page_array` (a page array) to fill. You can find more information about GFP flags [here](http://books.gigatux.nl/mirror/kerneldevelopment/0672327201/ch11lev1sec4.html).
   
 Below you can find a system call that uses mentioned interface.
 ```c
