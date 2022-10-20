@@ -1,4 +1,4 @@
-## **How to measure the number of cycles in C?** 
+## **How to accurately measure the number of cycles in C?** 
 save and include the following header file as utils.h.   
 ```c
 #ifndef _UTILS_H
