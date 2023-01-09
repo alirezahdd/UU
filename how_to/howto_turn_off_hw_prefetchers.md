@@ -18,3 +18,13 @@ sudo wrmsr -p 2 0x1a4 15 //for core 2
 .
 sudo wrmsr -p 7 0x1a4 15 //for core 7
 ```
+To turn them on again, write 0 in 0x1A4 for each core. 
+```bash
+sudo wrmsr -p 0 0x1a4 0 //for core 0
+sudo wrmsr -p 1 0x1a4 0 //for core 1
+sudo wrmsr -p 2 0x1a4 0 //for core 2
+.
+.
+.
+sudo wrmsr -p 7 0x1a4 0 //for core 7
+```
