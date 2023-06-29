@@ -6,5 +6,6 @@ wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot
 tar -xf linux-5.17.tar.gz
 cd linux-5.17/tools/perf
 sudo make
+sudo install
 sudo cp perf /usr/bin/
 ```
