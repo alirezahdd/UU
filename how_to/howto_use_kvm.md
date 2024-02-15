@@ -14,17 +14,17 @@ in this simple _step-by-step_ tutorial we are going to build and run a kvm via l
 ### **1. Preparing Disk Image**
 We create raw 20G disk image, named `ubuntu_18.04.img` (you can name it whatever you want!), and format it with the _ext4_ file system type.
 ```bash
-qemu-img create -f raw ubuntu_18.04.img 20G     
-mkfs.ext4 ubuntu_18.04.img                      
+qemu-img create -f raw ubuntu_20.04.img 20G     
+mkfs.ext4 ubuntu_20.04.img                      
 ```
 To install linux rootfs on the created disk image, we have to _mount_ the image on a folder (so we can access it) and then install the desired version of rootfs. So now we create a folder, named `mnt` (of course again you can name it whatever you want), and _mount_ the disk image on it.
 ```bash
 mkdir mnt
-sudo mount -o loop ubuntu_18.04.img mnt
+sudo mount -o loop ubuntu_20.04.img mnt
 ```
 Now we have access to the disk image using `mnt` folder. We now install rootfs on the disk image using `debootstrap` tool. We use `--include=ssh,vim` to have both `ssh` and `vim` installed on our virtual machine. We also can specify any debian release by passing its name (`bionic` ubuntu 18.04 in our example).
 ```bash
-sudo debootstrap --arch amd64 --include=ssh,vim bionic mnt
+sudo debootstrap --arch amd64 --include=ssh,vim,command-not-found focal mnt
 ```
 Now we should add a user (we need this for logging in into the virtual machine) to the created partition. For that, we first need to change Root to the mnt directory (using `chroot` command), add a user, make the user a sudoer, and exit the chroot by `exit` command. 
 ```bash
@@ -66,7 +66,7 @@ So far, we have collected requirements for the virtual machine. cd back to the d
 cd ..
 sudo qemu-system-x86_64 -m 70G \
 -kernel linux-5.14.1/arch/x86_64/boot/bzImage \
--drive file=ubuntu_18.04.img,index=0,media=disk,format=raw \
+-drive file=ubuntu_20.04.img,index=0,media=disk,format=raw \
 -append "root=/dev/sda rw transparent_hugepage=never console=ttyS0 no-kvmclock" \
 -netdev user,id=hostnet0,hostfwd=tcp::5556-:22,hostname=vm0 \
 -device virtio-net-pci,netdev=hostnet0,id=net0,bus=pci.0,addr=0x3 \
